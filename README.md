@@ -1,6 +1,23 @@
-# Moto🎮🚂 ( PseudoGameEngine )
+# Moto🎮🚂 ( MotoGameEngine )
 
-#Open Sorce C# 2D 🎮🚂 ( Game Engine )
+Open Sorce C# 2D 🎮🚂 ( Game Engine )
+
+MotoGameEngine is an open-source Game Engine based on SDL, will be update to use the hardware acceleration of modern video cards using OpenGL and positional sound built upon OpenAL. It runs on Windows. Feel free to improve upon MotoGameEngine.The development process is public and open to everyone. We are happy to include your patches after a code review.
+
+Features
+
+The MotoGameEngine Engine is a fully featured 2D game engine.
+
+    Graphics
+        accelerated 2D renderer.
+        suport all image formates.
+    Collision & Physics (Comping)
+    Audio (Comping)
+    Scripting system
+        Write game behaviours by attaching c# to game entities.
+    Input (Comping)
+        Mouse, Keyboard
+
 
 Moto🎮Engine use following Open Sorce projects:
 
