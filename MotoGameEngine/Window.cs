@@ -8,9 +8,9 @@ using static SDL2.SDL;  // add SDL class form namespace SDL2
 
 namespace MotoGameEngine
 {
-    public class Window
+    public class Window : IDisposable
     {
-        private IntPtr _Window;  // pointer for SDL window
+        public IntPtr _Window;  // pointer for SDL window
         public IntPtr _Renderer;
 
         private string _Title;
@@ -22,7 +22,6 @@ namespace MotoGameEngine
         public bool IsGameRunning;
 
         SDL_Event _event;
-
         public Window(string Title, int W, int H, bool isFullScreen = false)
         {
             IsGameRunning = false;
@@ -33,6 +32,7 @@ namespace MotoGameEngine
             if (!Init())
             {
                 Console.WriteLine("Error");
+                return;
             }
             //UPDATELOOP();
         }
@@ -52,7 +52,7 @@ namespace MotoGameEngine
             // if succeeded create our window    
             _Window = SDL_CreateWindow(_Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _W, _H, Flag);
             // if the window creation succeeded create our renderer    
-            if (_Window == null)
+            if (_Window == null || _Window == IntPtr.Zero)
             {
                 return false;
             }
@@ -63,7 +63,6 @@ namespace MotoGameEngine
             //This function expects Red, Green, Blue and   
             //  Alpha as color values  
             SDL_SetRenderDrawColor(_Renderer, 039, 058, 093, 255);
-
 
             IsGameRunning = true;
             return true;
@@ -79,6 +78,10 @@ namespace MotoGameEngine
             SDL_DestroyWindow(_Window);
             SDL_DestroyRenderer(_Renderer);
             SDL_Quit();
+        }      
+        ~Window()
+        {
+            Dispose();
         }
 
         public void Render() {        
