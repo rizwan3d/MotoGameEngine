@@ -56,7 +56,7 @@ namespace MotoGameEngine
             {
                 return false;
             }
-            _Renderer = SDL_CreateRenderer(_Window, -1, 0);
+            _Renderer = SDL_CreateRenderer(_Window, -1, SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
 
             // everything succeeded lets draw the window
             // set to black 

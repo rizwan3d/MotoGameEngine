@@ -34,6 +34,7 @@ namespace MotoGameEngineTest
             Sprite s2 = new Sprite(w, @"/sprite.bmp", 200, 200, 32, 32);
 
 
+
             while (w.IsGameRunning)
             {
                 SDL_RenderClear(w._Renderer);
@@ -41,6 +42,7 @@ namespace MotoGameEngineTest
                 w.EventHandler();
                 s.Animate(1,4);
                 s2.Animate(1, 8);
+
                 //img.ForEach(i => { i.Render(); });
 
                 SDL_RenderPresent(w._Renderer);
