@@ -36,6 +36,20 @@ namespace MotoGameEngine
             }
             //UPDATELOOP();
         }
+        public Window(string Title, Vector2D size, bool isFullScreen = false)
+        {
+            IsGameRunning = false;
+            _Title = Title;
+            _W = (int)size.X;
+            _H = (int)size.Y;
+            _isFullScreen = isFullScreen;
+            if (!Init())
+            {
+                Console.WriteLine("Error");
+                return;
+            }
+            //UPDATELOOP();
+        }
 
         bool Init()
         {

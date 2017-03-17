@@ -8,22 +8,17 @@ using static SDL2.SDL;
 
 namespace MotoGameEngine
 {
-    public class Image : IDisposable
-    {
-        protected IntPtr _Texture; // the new SDL_Texture variable 
+    public class Image : GameObject
+    {        
         protected SDL_Rect _sourceRectangle; // the first rectangle 
         protected SDL_Rect _destinationRectangle; // another rectangle 
-
-        protected IntPtr _Renderer;
 
         protected SDL_RendererFlip _Flip;
 
         protected float _Angle;
         protected SDL_Point _Center;
 
-        protected int _X, _Y, _H,_W;
-
-        public void SetImage(string Path)
+    public void SetImage(string Path)
         {
             IntPtr _TempSurface = IMG_Load(Environment.CurrentDirectory + Path);
 
@@ -37,25 +32,30 @@ namespace MotoGameEngine
         }
 
         public Image(Window win,string Path,int x,int y,int w,int h)
+        : base(win._Renderer,x,y,w,h)
         {
-            _X = x;
-            _Y = y;
-            _H = h;
-            _W = w;
-
-            _Renderer = win._Renderer;
             SetImage(Path);
+            init();
+        }
+        public Image(Window win, string Path, Vector2D position, Vector2D Size)
+        : base(win._Renderer, position, Size)
+        {
+            SetImage(Path);
+            init();
+        }
 
+        void init()
+        {
             int a;
             uint b;
 
             SDL_QueryTexture(_Texture, out b, out a, out _sourceRectangle.w, out _sourceRectangle.h);
 
-            _sourceRectangle.w = w;
-            _sourceRectangle.h = h;
+            _sourceRectangle.w = (int)Size.X;
+            _sourceRectangle.h = (int)Size.Y;
 
-            _destinationRectangle.x = x;
-            _destinationRectangle.y = y;
+            _destinationRectangle.x = (int)Position.X;
+            _destinationRectangle.y = (int)Position.Y;
 
             _destinationRectangle.w = _sourceRectangle.w;
             _destinationRectangle.h = _sourceRectangle.h;
@@ -65,12 +65,25 @@ namespace MotoGameEngine
             _Angle = 0;
             _Center.x = (_sourceRectangle.w) / 2;
             _Center.y = (_sourceRectangle.h) / 2;
-
         }
 
-        public virtual void Render()
+        public override void Draw()
         {
             SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
+        }
+
+        public override void Update()
+        {
+            if (Velocity != null)
+            {
+                Position = Position + Velocity;
+                _destinationRectangle.x = (int)Position.X;
+                _destinationRectangle.y = (int)Position.Y;
+            }
+            if(Acceleration != null)
+            {
+                Velocity = Velocity + Acceleration;
+            }
         }
 
         public void Flip(int angle,int x ,int y,int a)
@@ -97,7 +110,7 @@ namespace MotoGameEngine
         {
             _Angle = angle;
         }
-        public void Dispose()
+        public override void Dispose()
         {
             SDL_DestroyTexture(_Texture);
         }

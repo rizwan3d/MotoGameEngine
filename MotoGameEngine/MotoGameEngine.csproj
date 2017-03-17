@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObject.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="ImageManager.cs" />
     <Compile Include="Math.cs" />
+    <Compile Include="PhysicalObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="SpriteManager.cs" />
+    <Compile Include="Vector2D.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
