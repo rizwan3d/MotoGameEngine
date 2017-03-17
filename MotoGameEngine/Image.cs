@@ -34,12 +34,14 @@ namespace MotoGameEngine
         public Image(Window win,string Path,int x,int y,int w,int h)
         : base(win._Renderer,x,y,w,h)
         {
+            _win = win;
             SetImage(Path);
             init();
         }
         public Image(Window win, string Path, Vector2D position, Vector2D Size)
         : base(win._Renderer, position, Size)
         {
+            _win = win;
             SetImage(Path);
             init();
         }
@@ -65,6 +67,8 @@ namespace MotoGameEngine
             _Angle = 0;
             _Center.x = (_sourceRectangle.w) / 2;
             _Center.y = (_sourceRectangle.h) / 2;
+
+            _win.GameManager.Add(this);
         }
 
         public override void Draw()

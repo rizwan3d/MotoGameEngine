@@ -11,6 +11,8 @@ namespace MotoGameEngine
         public IntPtr _Renderer;
         public IntPtr _Texture; // the new SDL_Texture variable
 
+        public Window _win;
+
         public Vector2D Position { get; set; }
         public Vector2D Size { get; set; }
 

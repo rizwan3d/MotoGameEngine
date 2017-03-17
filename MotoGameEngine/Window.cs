@@ -20,8 +20,11 @@ namespace MotoGameEngine
         private SDL_WindowFlags Flag;
 
         public bool IsGameRunning;
-
+        GameManager _GameManager = new GameManager();
         SDL_Event _event;
+
+        public GameManager GameManager { get => _GameManager; set => _GameManager = value; }
+
         public Window(string Title, int W, int H, bool isFullScreen = false)
         {
             IsGameRunning = false;
@@ -102,8 +105,10 @@ namespace MotoGameEngine
             
             // clear the window to black  
             SDL_RenderClear(_Renderer);
-            // show the window
-    
+            Update();
+            Draw();
+            Animate();
+            // show the window    
             SDL_RenderPresent(_Renderer);
         }
         public void EventHandler() {
@@ -120,8 +125,17 @@ namespace MotoGameEngine
             }
         }    
         public void Update() {
-
+            _GameManager.Update();
         }
+        public void Draw()
+        {
+            _GameManager.Draw();
+        }
+        public void Animate()
+        {
+            _GameManager.Animate();
+        }
+        
 
     }
 }
