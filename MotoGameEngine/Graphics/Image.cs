@@ -22,11 +22,11 @@ namespace MotoGameEngine
         {
             IntPtr _TempSurface = IMG_Load(Environment.CurrentDirectory + Path);
 
-            if (_TempSurface == null || _TempSurface == IntPtr.Zero) { Console.WriteLine("Error"); return; }
+            if (_TempSurface == null || _TempSurface == IntPtr.Zero) { throw (new Loading_Image("Error occurred while loading image")); }
 
             _Texture = SDL_CreateTextureFromSurface(_Renderer, _TempSurface);
 
-            if (_Texture == null || _Texture == IntPtr.Zero) { Console.WriteLine("Error"); return; }           
+            if (_Texture == null || _Texture == IntPtr.Zero) { throw (new Loading_Image("Error occurred while loading image")); }           
 
             SDL_FreeSurface(_TempSurface);
         }
@@ -53,15 +53,6 @@ namespace MotoGameEngine
 
             SDL_QueryTexture(_Texture, out b, out a, out _sourceRectangle.w, out _sourceRectangle.h);
 
-            _sourceRectangle.w = (int)Size.X;
-            _sourceRectangle.h = (int)Size.Y;
-
-            _destinationRectangle.x = (int)Position.X;
-            _destinationRectangle.y = (int)Position.Y;
-
-            _destinationRectangle.w = _sourceRectangle.w;
-            _destinationRectangle.h = _sourceRectangle.h;
-
             _Flip = SDL_RendererFlip.SDL_FLIP_NONE;
 
             _Angle = 0;
@@ -73,6 +64,14 @@ namespace MotoGameEngine
 
         public override void Draw()
         {
+            _sourceRectangle.w = (int)Size.X;
+            _sourceRectangle.h = (int)Size.Y;
+
+            _destinationRectangle.x = (int)Position.X;
+            _destinationRectangle.y = (int)Position.Y;
+
+            _destinationRectangle.w = _sourceRectangle.w;
+            _destinationRectangle.h = _sourceRectangle.h;
             SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
         }
 
