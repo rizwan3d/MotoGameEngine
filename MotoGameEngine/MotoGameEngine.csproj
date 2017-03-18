@@ -54,6 +54,8 @@
     <Compile Include="Graphics\SpriteManager.cs" />
     <Compile Include="Math\Vector2D.cs" />
     <Compile Include="Graphics\Window.cs" />
+    <Compile Include="Scene\Scene.cs" />
+    <Compile Include="Scene\SceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

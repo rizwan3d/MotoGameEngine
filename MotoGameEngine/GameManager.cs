@@ -32,21 +32,47 @@ namespace MotoGameEngine
 
         public void Draw(GameObject Object)
         {
-            _Objects.ForEach(s => { if (s == Object) s.Draw(); });
+            _Objects.ForEach(
+                s => 
+                {
+                    if (s == Object)
+                        s.Draw();
+                });
         }
 
         public void Animate()
         {
-            _Objects.ForEach(s => { if (s is Sprite) { Sprite ss = (Sprite)s; ss.Animate(); } });
+            _Objects.ForEach(
+                s => 
+                {
+                    if (s is Sprite)
+                    {
+                        Sprite ss = (Sprite)s;
+                        ss.Animate();
+                    }
+                });
         }
 
         public void Animate(Sprite sprite)
         {
-            _Objects.ForEach(s => { if (s is Sprite) { Sprite ss = (Sprite)s; if(ss == sprite) ss.Animate(); } });
+            _Objects.ForEach(
+                s => 
+                {
+                    if (s is Sprite)
+                    {
+                        Sprite ss = (Sprite)s;
+                        if (ss == sprite)
+                            ss.Animate();
+                    }
+                });
         }
         public override void Update()
         {
-            _Objects.ForEach(s => { s.Update(); });
+            _Objects.ForEach(                
+                s => 
+                {
+                    s.Update();
+                });
         }
         public override void Dispose()
         {

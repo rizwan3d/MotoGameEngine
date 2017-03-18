@@ -31,17 +31,17 @@ namespace MotoGameEngine
             SDL_FreeSurface(_TempSurface);
         }
 
-        public Image(Window win,string Path,int x,int y,int w,int h)
-        : base(win._Renderer,x,y,w,h)
+        public Image(Scene s,string Path,int x,int y,int w,int h)
+        : base(s._win._Renderer,x,y,w,h)
         {
-            _win = win;
+            _S = s;
             SetImage(Path);
             init();
         }
-        public Image(Window win, string Path, Vector2D position, Vector2D Size)
-        : base(win._Renderer, position, Size)
+        public Image(Scene s, string Path, Vector2D position, Vector2D Size)
+        : base(s._win._Renderer, position, Size)
         {
-            _win = win;
+            _S = s;
             SetImage(Path);
             init();
         }
@@ -59,20 +59,25 @@ namespace MotoGameEngine
             _Center.x = (_sourceRectangle.w) / 2;
             _Center.y = (_sourceRectangle.h) / 2;
 
-            _win.GameManager.Add(this);
+            _S.Add(this);
+            //_win.SceneManager.Add();
+
         }
 
         public override void Draw()
         {
-            _sourceRectangle.w = (int)Size.X;
-            _sourceRectangle.h = (int)Size.Y;
+            if (Visible)
+            {
+                _sourceRectangle.w = (int)Size.X;
+                _sourceRectangle.h = (int)Size.Y;
 
-            _destinationRectangle.x = (int)Position.X;
-            _destinationRectangle.y = (int)Position.Y;
+                _destinationRectangle.x = (int)Position.X;
+                _destinationRectangle.y = (int)Position.Y;
 
-            _destinationRectangle.w = _sourceRectangle.w;
-            _destinationRectangle.h = _sourceRectangle.h;
-            SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
+                _destinationRectangle.w = _sourceRectangle.w;
+                _destinationRectangle.h = _sourceRectangle.h;
+                SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
+            }
         }
 
         public override void Update()

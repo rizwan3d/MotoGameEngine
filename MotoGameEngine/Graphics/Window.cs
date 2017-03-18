@@ -20,7 +20,7 @@ namespace MotoGameEngine
         private SDL_WindowFlags Flag;
 
         public bool IsGameRunning;
-        GameManager _GameManager = new GameManager();
+  
         SDL_Event _event;
 
         int _FPS;
@@ -29,7 +29,8 @@ namespace MotoGameEngine
         
         UInt32 frameStart, frameTime;
 
-        public GameManager GameManager { get => _GameManager; set => _GameManager = value; }
+        private SceneManager _SceneManager = new SceneManager();
+        public SceneManager SceneManager { get => _SceneManager; set => _SceneManager = value; }
 
         public event EventUpdatedelegate onEvent;
         public event Updatedelegate Update;
@@ -91,6 +92,7 @@ namespace MotoGameEngine
             FPS = 60;
 
             IsGameRunning = true;
+            
             return true;
         }
 
@@ -116,11 +118,10 @@ namespace MotoGameEngine
             frameStart = SDL_GetTicks();
             // clear the window to black  
             SDL_RenderClear(_Renderer);
-            //EventHandler();
-            update();
-            Draw();
-            Animate();
+            
+            Update?.Invoke(this);
             // show the window    
+            _SceneManager.Update();
             SDL_RenderPresent(_Renderer);
 
             frameTime = SDL_GetTicks() - frameStart;
@@ -139,19 +140,7 @@ namespace MotoGameEngine
         //        }
         //    }
         //}
-        public void update()
-        {
-            _GameManager.Update();
-        }
-        public void Draw()
-        {
-            _GameManager.Draw();
-        }
-        public void Animate()
-        {
-            _GameManager.Animate();
-        }
-
+       
         #region Input
 
         //create a instance of InputInit 
@@ -253,9 +242,8 @@ namespace MotoGameEngine
                     // call give function on new event
                     Event e = ei.eventfinder[_event.type];
                     //ventUpdateFunction(e);                             
-                   onEvent(this, e);
-                }
-                Update(this);
+                   onEvent?.Invoke(this, e);
+                }                
                 Render();               
             }
         }
