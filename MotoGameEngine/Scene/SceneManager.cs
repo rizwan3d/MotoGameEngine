@@ -10,7 +10,8 @@ namespace MotoGameEngine
     {
         List<Scene> _Scene;
 
-        public SceneManager() : base(IntPtr.Zero)
+        public SceneManager() 
+            : base(IntPtr.Zero)
         {
             _Scene = new List<Scene>();
         }
@@ -36,7 +37,11 @@ namespace MotoGameEngine
 
         public void LoadEverything()
         {
-            _Scene.ForEach(s => { s.Load(); });
+            _Scene.ForEach(
+                s => 
+                {
+                    s.Load();
+                });
         }
 
         public void LoadScene(Scene scene)

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static SDL2.SDL;
-using static SDL2.SDL_image;
 using MotoGameEngine;
 
 namespace MotoGameEngineTest
@@ -46,6 +42,7 @@ namespace MotoGameEngineTest
 
             w.Update += W_Update;
             w.onEvent += W_onEvent;
+            
 
             w.Start();
 

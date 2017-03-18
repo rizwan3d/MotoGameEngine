@@ -22,11 +22,19 @@ namespace MotoGameEngine
         {
             IntPtr _TempSurface = IMG_Load(Environment.CurrentDirectory + Path);
 
-            if (_TempSurface == null || _TempSurface == IntPtr.Zero) { throw (new Loading_Image("Error occurred while loading image")); }
+            if (_TempSurface == null 
+                || _TempSurface == IntPtr.Zero)
+            {
+                throw (new Loading_Image("Error occurred while loading image"));
+            }
 
             _Texture = SDL_CreateTextureFromSurface(_Renderer, _TempSurface);
 
-            if (_Texture == null || _Texture == IntPtr.Zero) { throw (new Loading_Image("Error occurred while loading image")); }           
+            if (_Texture == null 
+                || _Texture == IntPtr.Zero)
+            {
+                throw (new Loading_Image("Error occurred while loading image"));
+            }           
 
             SDL_FreeSurface(_TempSurface);
         }

@@ -20,7 +20,8 @@ namespace MotoGameEngine
         public int status = 1;
 
         public string Name { get; set; }
-        public Scene(Window w) : base(w._Renderer)
+        public Scene(Window w) 
+            : base(w._Renderer)
         {
             _Objects = new List<GameObject>();
             _win = w;
@@ -42,18 +43,34 @@ namespace MotoGameEngine
         public void Load()
         {
             OnSceneLoad?.Invoke(this);
-            _Objects.ForEach(s => { s.Draw(); });
+            _Objects.ForEach(
+                s=> 
+                {
+                    s.Draw();
+                });
         }
                 
         public void Animate()
         {
             OnSceneAnimate?.Invoke(this);
-            _Objects.ForEach(s => { if (s is Sprite) { Sprite ss = (Sprite)s; ss.Animate(); } });
+            _Objects.ForEach(
+                s => 
+                {
+                    if (s is Sprite)
+                    {
+                        Sprite ss = (Sprite)s;
+                        ss.Animate();
+                    }
+                });
         }
         public override void Update()
         {
             OnSceneUpdate?.Invoke(this);
-            _Objects.ForEach(s => { s.Update(); });
+            _Objects.ForEach(
+                s => 
+                {
+                    s.Update();
+                });
         }
         public override void Dispose()
         {

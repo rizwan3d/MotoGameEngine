@@ -44,7 +44,7 @@ namespace MotoGameEngine
             _isFullScreen = isFullScreen;
             if (!Init())
             {
-                throw (new Initializing("Error occurred initializing"));
+                throw (new Initializing("Error occurred while initializing"));
             }
             //UPDATELOOP();
         }
@@ -57,7 +57,7 @@ namespace MotoGameEngine
             _isFullScreen = isFullScreen;
             if (!Init())
             {
-                throw (new Initializing("Error occurred initializing"));
+                throw (new Initializing("Error occurred while initializing"));
             }
           
         }
@@ -65,8 +65,9 @@ namespace MotoGameEngine
         bool Init()
         {
 
-            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
-                throw (new Initializing_SDL("Error occurred initializing SDL"));
+            if (SDL_Init(SDL_INIT_VIDEO 
+                | SDL_INIT_AUDIO) < 0)
+                throw (new Initializing_SDL("Error occurred while initializing SDL"));
 
             Flag = SDL_WindowFlags.SDL_WINDOW_SHOWN;
 
@@ -79,7 +80,15 @@ namespace MotoGameEngine
             // if the window creation succeeded create our renderer    
             if (_Window == null || _Window == IntPtr.Zero)
             {
-                throw (new Initializing_Window("Error occurred initializing Window"));
+                throw (new Initializing_Window("Error occurred while initializing Window"));
+            }
+
+            if(SDL_image.IMG_Init(SDL_image.IMG_InitFlags.IMG_INIT_JPG 
+                | SDL_image.IMG_InitFlags.IMG_INIT_PNG 
+                | SDL_image.IMG_InitFlags.IMG_INIT_TIF 
+                | SDL_image.IMG_InitFlags.IMG_INIT_WEBP) < 0 ){
+
+                throw (new Initializing_Window("Error occurred while initializing Images"));
             }
             _Renderer = SDL_CreateRenderer(_Window, -1, SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
 
@@ -106,6 +115,7 @@ namespace MotoGameEngine
             SDL_DestroyWindow(_Window);
             SDL_DestroyRenderer(_Renderer);
             _Window = IntPtr.Zero;
+            SDL_image.IMG_Quit();
             SDL_Quit();
             Environment.Exit(0);
         }      
@@ -127,20 +137,7 @@ namespace MotoGameEngine
             frameTime = SDL_GetTicks() - frameStart;
             if (frameTime < DELAY_TIME) { Delay(DELAY_TIME - frameTime); }
         }
-        //public void EventHandler() {
-        //    if (SDL_PollEvent(out _event) == 1)
-        //    {
-        //        switch (_event.type)
-        //        {
-        //            case SDL_EventType.SDL_QUIT:
-        //                IsGameRunning = false;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //}
-       
+         
         #region Input
 
         //create a instance of InputInit 

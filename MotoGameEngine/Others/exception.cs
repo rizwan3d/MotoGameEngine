@@ -12,6 +12,11 @@ namespace MotoGameEngine
         public Initializing_Window(string message) : base(message) { }
     }
 
+    public class Initializing_Image : Exception
+    {
+        public Initializing_Image(string message) : base(message) { }
+    }
+
     public class Initializing : Exception
     {
         public Initializing(string message) : base(message) { }
