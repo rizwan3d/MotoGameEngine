@@ -20,6 +20,8 @@ namespace MotoGameEngine
         public Vector2D Velocity { get; set; }
         public Vector2D Acceleration { get; set; }
 
+        public MusicManager MusicManager;
+
         public bool Visible
         {
             get => visible;
@@ -32,6 +34,7 @@ namespace MotoGameEngine
         {
             Position = new Vector2D(0, 0); Size = new Vector2D(0, 0);
             _Renderer = Renderer;
+            MusicManager = new MusicManager();
         }
         public GameObject(IntPtr Renderer, int x, int y, int w, int h)
         {
@@ -42,6 +45,7 @@ namespace MotoGameEngine
             Position.Y = y;
             Size.X = h;
             Size.Y = w;
+            MusicManager = new MusicManager();
         }
         public GameObject(IntPtr Renderer, Vector2D position , Vector2D  size)
         {
@@ -50,12 +54,15 @@ namespace MotoGameEngine
             _Renderer = Renderer;
             Position = position;
             Size = size;
+            MusicManager = new MusicManager();
         }
         public virtual void Draw() {  }
         public virtual void Update() {  }
         public virtual void Clean() {  }
 
-        public virtual void Dispose() {  }       
+        public virtual void Dispose() {
+            MusicManager.Dispose();
+        }       
 
         ~GameObject()
         {

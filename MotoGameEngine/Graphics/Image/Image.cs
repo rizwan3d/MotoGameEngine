@@ -20,7 +20,7 @@ namespace MotoGameEngine
 
     public void SetImage(string Path)
         {
-            IntPtr _TempSurface = IMG_Load(Environment.CurrentDirectory + Path);
+            IntPtr _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
 
             if (_TempSurface == null 
                 || _TempSurface == IntPtr.Zero)

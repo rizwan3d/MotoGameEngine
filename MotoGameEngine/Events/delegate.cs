@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace MotoGameEngine
 {
     public delegate void Updatedelegate(Window sender);
+    public delegate void OnExit(Window sender);
 
     public delegate void OnSceneLoad(Scene sender);
     public delegate void OnSceneUnload(Scene sender);

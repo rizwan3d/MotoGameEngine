@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MotoGameEngine;
+﻿using MotoGameEngine;
 
 namespace MotoGameEngineTest
 {
@@ -28,41 +25,51 @@ namespace MotoGameEngineTest
 
             sc.OnSceneUpdate += Sc_OnSceneUpdate;
 
-            
-
             w.SceneManager.Add(sc);
 
             w.SceneManager.Add(sc2);
 
+            img.MusicManager.AudioFile = @"./a.mp3";
+            s.MusicManager.AudioFile = @"./b.mp3";
+            s.MusicManager.PlayMusic();
+            img.MusicManager.PlayMusic();
             s.Visible = true;
 
             img.Rotate(270);
             s.Flip(0, 0, 0, 1);
             s.Velocity = new Vector2D(1, 0);
-
+       
+           
             w.Update += W_Update;
             w.onEvent += W_onEvent;
-            
-
+            w.OnExit += W_OnExit;
             w.Start();
 
+        }
+
+        private static void W_OnExit(Window sender)
+        {
+           
         }
 
         private static void Sc_OnSceneUpdate(Scene sender)
         {
             s.Animate();
             s2.Animate();
-            if (s.Position.X > 800)
+            if (s.Position.X == 800 - 65)
             {
-                s.Position.X = -64;
+                s.Velocity = new Vector2D(-1, 0);
+                s.Flip(0, 0, 0, 0);
+            }
+            if (s.Position.X == 0)
+            {
+                s.Velocity = new Vector2D(1, 0);
+                s.Flip(0, 0, 0, 1);
             }
         }
 
         private static void W_onEvent(Window sender, Event e)
         {
-            if (e == Event.QUIT)
-                w.IsGameRunning = false;
-
             if (sender.IsKeyPresed(KeyCode.d))
             {
                 s2.Position.X += 1;

@@ -34,6 +34,7 @@ namespace MotoGameEngine
 
         public event EventUpdatedelegate onEvent;
         public event Updatedelegate Update;
+        public event OnExit OnExit;
 
         public Window(string Title, int W, int H, bool isFullScreen = false)
         {
@@ -112,6 +113,7 @@ namespace MotoGameEngine
 
         public void Dispose()
         {
+            OnExit?.Invoke(this);
             SDL_DestroyWindow(_Window);
             SDL_DestroyRenderer(_Renderer);
             _Window = IntPtr.Zero;
@@ -231,6 +233,8 @@ namespace MotoGameEngine
                 /* Check for new events */
                 if (SDL_PollEvent(out _event) == 1)
                 {
+                    if (ei.eventfinder[_event.type] == Event.QUIT)
+                        IsGameRunning = false;
                     //if event is related to Window
                     //if (_event.type == SDL_EventType.SDL_WINDOWEVENT)
                     //    //if Window resized call  resetSize()
@@ -243,6 +247,7 @@ namespace MotoGameEngine
                 }                
                 Render();               
             }
+            Dispose();
         }
         #endregion
     }
