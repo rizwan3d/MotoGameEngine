@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotoGameEngine
 { 
-    public class GameObject :IDisposable
+    public class GameObject 
     {
         public IntPtr _Renderer;
         public IntPtr _Texture; // the new SDL_Texture variable
@@ -59,14 +59,5 @@ namespace MotoGameEngine
         public virtual void Draw() {  }
         public virtual void Update() {  }
         public virtual void Clean() {  }
-
-        public virtual void Dispose() {
-            MusicManager.Dispose();
-        }       
-
-        ~GameObject()
-        {
-            Dispose();
-        }
     }
 }

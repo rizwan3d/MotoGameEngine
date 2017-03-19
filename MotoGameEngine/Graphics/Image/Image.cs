@@ -126,13 +126,9 @@ namespace MotoGameEngine
         {
             _Angle = angle;
         }
-        public override void Dispose()
+        public void IDispose()
         {
             SDL_DestroyTexture(_Texture);
-        }
-        ~Image()
-        {
-            Dispose();
         }
     }    
 }

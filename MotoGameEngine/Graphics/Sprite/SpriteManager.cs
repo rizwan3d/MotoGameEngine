@@ -37,24 +37,12 @@ namespace MotoGameEngine
 
         public void Animate()
         {
-            _Sprties.ForEach(s => { s.Animate(); });
+            _Sprties.ForEach(s => { s.StartAnimate(); });
         }
 
         public void Animate(Sprite sprite)
         {
-            _Sprties.ForEach(s => { if(s == sprite) s.Animate(); });
+            _Sprties.ForEach(s => { if(s == sprite) s.StartAnimate(); });
         }
-
-        public override void Dispose()
-        {
-            _Sprties.ForEach(s => { s.Dispose(); });
-            for(int i = 0; i < _Sprties.Count; i ++) { _Sprties.RemoveAt(i); }
-            _Sprties = null;
-        }
-        ~SpriteManager()
-        {
-            Dispose();
-        }
-
     }
 }

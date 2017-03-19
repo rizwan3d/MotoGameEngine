@@ -48,7 +48,7 @@ namespace MotoGameEngine
                     if (s is Sprite)
                     {
                         Sprite ss = (Sprite)s;
-                        ss.Animate();
+                        ss.StartAnimate();
                     }
                 });
         }
@@ -62,7 +62,7 @@ namespace MotoGameEngine
                     {
                         Sprite ss = (Sprite)s;
                         if (ss == sprite)
-                            ss.Animate();
+                            ss.StartAnimate();
                     }
                 });
         }
@@ -73,14 +73,6 @@ namespace MotoGameEngine
                 {
                     s.Update();
                 });
-        }
-        public override void Dispose()
-        {
-            _Objects = null;
-        }
-        ~GameManager()
-        {
-            Dispose();
         }
     }
 }

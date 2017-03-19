@@ -12,6 +12,26 @@ namespace MotoGameEngineTest
         static Scene sc;
         static Scene sc2;
 
+
+        //Animation need more work
+        //Event System need more events
+        //Collision
+        //GUI .Button,GUI Panal ,Lable etc
+        //Tilemaps
+        //Partical System
+        //movie files
+        //camera system
+        //load data(image,sprite,animation,tilemap,movie etc) form XML or Json
+        //Visual editor
+        //
+        //Additional
+        //
+        //Rigidbody
+        //path finding
+        //AI agents
+        //Networking
+
+
         public static void Main()
         {
             w = new Window("test", new Vector2D(800, 640));
@@ -23,16 +43,24 @@ namespace MotoGameEngineTest
             s = new Sprite(sc, @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
             s2= new Sprite(sc2, @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
 
+            GameObject g = new GameObject(w._Renderer);
+            sc.Add(g);
+
             sc.OnSceneUpdate += Sc_OnSceneUpdate;
 
             w.SceneManager.Add(sc);
-
             w.SceneManager.Add(sc2);
 
             img.MusicManager.AudioFile = @"./a.mp3";
             s.MusicManager.AudioFile = @"./b.mp3";
+            s2.MusicManager.AudioFile = @"./c.mp3";
+            g.MusicManager.AudioFile = @"/d.mp3";
+
             s.MusicManager.PlayMusic();
-            img.MusicManager.PlayMusic();
+            //img.MusicManager.PlayMusic();
+            //s2.MusicManager.PlayMusic();
+            //g.MusicManager.PlayMusic();
+            s.MusicManager.StopMusic();
             s.Visible = true;
 
             img.Rotate(270);
@@ -44,18 +72,18 @@ namespace MotoGameEngineTest
             w.onEvent += W_onEvent;
             w.OnExit += W_OnExit;
             w.Start();
-
+            
         }
 
         private static void W_OnExit(Window sender)
         {
-           
+            
         }
 
         private static void Sc_OnSceneUpdate(Scene sender)
         {
-            s.Animate();
-            s2.Animate();
+            s.StartAnimate();
+            s2.StartAnimate();
             if (s.Position.X == 800 - 65)
             {
                 s.Velocity = new Vector2D(-1, 0);

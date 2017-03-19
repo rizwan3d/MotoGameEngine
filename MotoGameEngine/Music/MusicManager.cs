@@ -11,13 +11,13 @@ using CSCore.Codecs;
 
 namespace MotoGameEngine
 {
-    public class MusicManager : IDisposable
+    public class MusicManager
     {
         private string _AudioFile;
         private ISoundOut soundOut;
         private IWaveSource soundSource;
 
-        public bool PlayOnce = true;
+        public bool PlayOnce;
 
         public string AudioFile {
             get
@@ -26,57 +26,45 @@ namespace MotoGameEngine
             }
             set
             {
-                _AudioFile = value;
+                _AudioFile = value;                
+                
                 soundSource = GetSoundSource();
-                //SoundOut implementation which plays the sound
-                soundOut = GetSoundOut();
-
                 //Tell the SoundOut which sound it has to play
-                soundOut.Initialize(soundSource);
-                soundOut.Stopped += SoundOut_Stopped;
+                soundOut?.Initialize(soundSource);
+               
             }
         }
         public MusicManager()
         {
-            
+            //SoundOut implementation which plays the sound
+            soundOut = GetSoundOut();
+            soundOut.Stopped += SoundOut_Stopped;
+            PlayOnce = true;
         }
 
         private void SoundOut_Stopped(object sender, PlaybackStoppedEventArgs e)
         {
-            if (soundOut != null)
-            {
-                if (soundOut.PlaybackState == PlaybackState.Stopped)
-                {
-                    soundSource = GetSoundSource();
-                    //SoundOut implementation which plays the sound
-                    soundOut = GetSoundOut();
 
-                    //Tell the SoundOut which sound it has to play
-                    soundOut.Initialize(soundSource);
-                }
-                if (!PlayOnce)
-                {
-                    PlayMusic();
-                }
+            soundOut = GetSoundOut();
+            //Tell the SoundOut which sound it has to play
+            soundOut?.Initialize(soundSource);
+
+            if (!PlayOnce)
+            {
+                soundOut?.Play();
             }
         }
 
         public void PlayMusic()
         {
-            if (soundOut != null)
-            {
-                PlayOnce = false;
-                soundOut.Play();
-            }
+            PlayOnce = false;
+            soundOut?.Play();
         }
 
         public void PlaySFX()
         {
-            if (soundOut != null)
-            {
-                PlayOnce = true;
-                soundOut.Play();
-            }
+            PlayOnce = true;
+            soundOut.Play();
         }
 
         private ISoundOut GetSoundOut()
@@ -89,36 +77,18 @@ namespace MotoGameEngine
 
         private IWaveSource GetSoundSource()
         {
-            //return any source ... in this example, we'll just play a mp3 file
             return CodecFactory.Instance.GetCodec(SDL_GetBasePath() +  _AudioFile);
         }
 
         public void PauseMusic()
         {
-            if(soundOut != null)
-                soundOut.Pause();
+            soundOut?.Pause();
         }
 
         public void StopMusic()
         {
             PlayOnce = true;
-            if (soundOut != null)
-                soundOut.Stop();
-        }
-
-        public void Dispose()
-        {
-            if (soundOut != null)
-            {
-                soundOut.Stopped -= SoundOut_Stopped;
-                soundOut.Dispose();
-                soundSource.Dispose();
-            }
-        }
-
-        ~MusicManager()
-        {
-            Dispose();
+            soundOut?.Stop();
         }
     }
     

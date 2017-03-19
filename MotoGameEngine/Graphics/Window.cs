@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using SDL2;
 using static SDL2.SDL;  // add SDL class form namespace SDL2
+using System.Reflection;
 
 namespace MotoGameEngine
 {
-    public class Window : IDisposable
+    public class Window
     {
         public IntPtr _Window;  // pointer for SDL window
         public IntPtr _Renderer;
@@ -111,19 +112,15 @@ namespace MotoGameEngine
             SDL_Delay(Time);
         }
 
-        public void Dispose()
+        public void IDispose()
         {
+
             OnExit?.Invoke(this);
             SDL_DestroyWindow(_Window);
             SDL_DestroyRenderer(_Renderer);
-            _Window = IntPtr.Zero;
             SDL_image.IMG_Quit();
             SDL_Quit();
-            Environment.Exit(0);
-        }      
-        ~Window()
-        {
-            Dispose();
+           // Environment.Exit(0);
         }
 
         public void Render() {
@@ -247,7 +244,7 @@ namespace MotoGameEngine
                 }                
                 Render();               
             }
-            Dispose();
+            IDispose();
         }
         #endregion
     }

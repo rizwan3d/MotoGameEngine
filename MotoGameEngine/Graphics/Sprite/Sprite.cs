@@ -20,7 +20,7 @@ namespace MotoGameEngine
             : base(s, Path, position , Size)
         { _TotalFrames = TotalFrames; }
 
-        public void Animate()
+        public void StartAnimate()
         {
             if (Visible)
             {

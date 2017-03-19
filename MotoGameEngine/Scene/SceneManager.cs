@@ -70,7 +70,7 @@ namespace MotoGameEngine
                             if (o is Sprite)
                             {
                                 Sprite ss = (Sprite)o;
-                                ss.Animate();
+                                ss.StartAnimate();
                             }
                         });
                 });
@@ -87,7 +87,7 @@ namespace MotoGameEngine
                            {
                                Sprite ss = (Sprite)o;
                                if (ss == sprite)
-                                   ss.Animate();
+                                   ss.StartAnimate();
                            }
                        });
                });
@@ -98,14 +98,6 @@ namespace MotoGameEngine
             {
                     _Scene[i].Update();
             }
-        }
-        public override void Dispose()
-        {
-            _Scene = null;
-        }
-        ~SceneManager()
-        {
-            Dispose();
         }
     }
 }
