@@ -57,9 +57,9 @@ namespace MotoGameEngineTest
             g.MusicManager.AudioFile = @"/d.mp3";
 
             s.MusicManager.PlayMusic();
-            //img.MusicManager.PlayMusic();
-            //s2.MusicManager.PlayMusic();
-            //g.MusicManager.PlayMusic();
+            img.MusicManager.PlayMusic();
+            s2.MusicManager.PlayMusic();
+            g.MusicManager.PlayMusic();
             s.MusicManager.StopMusic();
             s.Visible = true;
 
