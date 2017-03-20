@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SDL2;
 using static SDL2.SDL;  // add SDL class form namespace SDL2
 using System.Reflection;
+using System.Threading;
 
 namespace MotoGameEngine
 {
@@ -120,7 +121,7 @@ namespace MotoGameEngine
             SDL_DestroyRenderer(_Renderer);
             SDL_image.IMG_Quit();
             SDL_Quit();
-           // Environment.Exit(0);
+            Environment.Exit(0);
         }
 
         public void Render() {

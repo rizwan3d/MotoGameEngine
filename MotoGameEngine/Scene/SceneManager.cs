@@ -27,12 +27,13 @@ namespace MotoGameEngine
         public void UnLoad(Scene scene)
         {
             //_Scene.Remove(scene);
-            scene._Objects.ForEach(
-                o => 
-                {
-                    o.Visible = false;
-                });
-            scene.status = 0;
+            //scene._Objects.ForEach(
+            //    o => 
+            //    {
+            //        o.Visible = false;
+            //    });
+            //scene.status = 0;
+            scene.Unload();
         }
 
         public void LoadEverything()
@@ -50,14 +51,14 @@ namespace MotoGameEngine
                 s => {
                     if (s == scene)
                         s.Load();
-                    if (s.status == 0)
-                    {
-                        s._Objects.ForEach(
-                            o => {
-                                o.Visible = true;
-                            });
-                            s.status = 1;
-                    }
+                    //if (s.status == 0)
+                    //{
+                    //    s._Objects.ForEach(
+                    //        o => {
+                    //            o.Visible = true;
+                    //        });
+                    //        s.status = 1;
+                    //}
                 });
         }
 

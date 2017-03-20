@@ -18,9 +18,11 @@ namespace MotoGameEngine
         protected float _Angle;
         protected SDL_Point _Center;
 
+        IntPtr _TempSurface;
+
     public void SetImage(string Path)
         {
-            IntPtr _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
+            _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
 
             if (_TempSurface == null 
                 || _TempSurface == IntPtr.Zero)
@@ -74,9 +76,13 @@ namespace MotoGameEngine
 
         public override void Draw()
         {
-            if (Visible)
+            if (_Texture == null)
             {
-                _sourceRectangle.w = (int)Size.X;
+                _Texture = SDL_CreateTextureFromSurface(_Renderer, _TempSurface);
+                SDL_FreeSurface(_TempSurface);
+            }
+            SDL_FreeSurface(_TempSurface);
+            _sourceRectangle.w = (int)Size.X;
                 _sourceRectangle.h = (int)Size.Y;
 
                 _destinationRectangle.x = (int)Position.X;
@@ -85,7 +91,7 @@ namespace MotoGameEngine
                 _destinationRectangle.w = _sourceRectangle.w;
                 _destinationRectangle.h = _sourceRectangle.h;
                 SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
-            }
+           
         }
 
         public override void Update()

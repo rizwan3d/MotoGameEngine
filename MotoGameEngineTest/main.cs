@@ -11,8 +11,7 @@ namespace MotoGameEngineTest
         static Sprite s2;
         static Scene sc;
         static Scene sc2;
-
-
+        static MusicManager m;
         //Animation need more work
         //Event System need more events
         //Collision
@@ -21,7 +20,7 @@ namespace MotoGameEngineTest
         //Partical System
         //movie files
         //camera system
-        //load data(image,sprite,animation,tilemap,movie etc) form XML or Json
+        //load data(image,sprite,animation,tilemap,movie etc) form XML
         //Visual editor
         //
         //Additional
@@ -51,16 +50,12 @@ namespace MotoGameEngineTest
             w.SceneManager.Add(sc);
             w.SceneManager.Add(sc2);
 
-            img.MusicManager.AudioFile = @"./a.mp3";
-            s.MusicManager.AudioFile = @"./b.mp3";
-            s2.MusicManager.AudioFile = @"./c.mp3";
-            g.MusicManager.AudioFile = @"/d.mp3";
+            m = new MusicManager();
 
-            s.MusicManager.PlayMusic();
-            img.MusicManager.PlayMusic();
-            s2.MusicManager.PlayMusic();
-            g.MusicManager.PlayMusic();
-            s.MusicManager.StopMusic();
+            m.Add(@"a.wav","a",true);
+
+            m.Play("a");
+
             s.Visible = true;
 
             img.Rotate(270);

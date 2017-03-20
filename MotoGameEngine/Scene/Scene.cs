@@ -72,5 +72,14 @@ namespace MotoGameEngine
                     s.Update();
                 });
         }
+
+        public void Unload()
+        {
+            _Objects.ForEach(
+                o => 
+                {
+                    ((Image)o).IDispose();
+                });
+        }
     }
 }
