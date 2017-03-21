@@ -19,7 +19,6 @@ namespace MotoGameEngine
             _Name = Name;
             
             audioFileReader = new AudioFileReader(Path);
-            Debug.Warning(audioFileReader.Position.ToString());
             waveOutDevice.Init(audioFileReader);
         }
 
@@ -54,6 +53,11 @@ namespace MotoGameEngine
                 waveOutDevice.Dispose();
                 waveOutDevice = null;
             }
+        }
+
+        public void Pause()
+        {
+            waveOutDevice.Stop();
         }
 
         public void Stop()

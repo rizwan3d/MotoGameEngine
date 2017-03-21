@@ -31,6 +31,7 @@ namespace MotoGameEngine
         public GameObject(IntPtr Renderer)
         {
             Position = new Vector2D(0, 0); Size = new Vector2D(0, 0);
+            Visible = false;
             _Renderer = Renderer;
         }
         public GameObject(IntPtr Renderer, int x, int y, int w, int h)
@@ -41,12 +42,15 @@ namespace MotoGameEngine
             Position.X = x;
             Position.Y = y;
             Size.X = h;
+            Visible = false;
+
             Size.Y = w;
         }
         public GameObject(IntPtr Renderer, Vector2D position , Vector2D  size)
         {
             Position = new Vector2D(0, 0);
             Size = new Vector2D(0, 0);
+            Visible = false;
             _Renderer = Renderer;
             Position = position;
             Size = size;

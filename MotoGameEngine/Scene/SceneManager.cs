@@ -22,6 +22,7 @@ namespace MotoGameEngine
         }
         public void Remove(Scene scene)
         {
+            UnLoad(scene);
             _Scene.Remove(scene);
         }
         public void UnLoad(Scene scene)
@@ -43,54 +44,27 @@ namespace MotoGameEngine
                 });
         }
 
+        public void Start()
+        {
+            LoadEverything();
+        }
+
         public void LoadScene(Scene scene)
         {
             _Scene.ForEach(
                  s => {
                      if (s == scene)
-                         s.Load();
-                     if (s.status == 0)
                      {
-                         s._Objects.ForEach(
-                             o => {
-                                 o.Visible = true;
-                             });
-                         s.status = 1;
+                             s._Objects.ForEach(
+                                 o =>
+                                 {
+                                     o.Visible = true;
+                                 });
+                             s.status = 1;
                      }
                  });
         }
 
-        public void AnimateScene()
-        {
-            _Scene.ForEach(
-                s => {
-                    s._Objects.ForEach(
-                        o => {
-                            if (o is Sprite)
-                            {
-                                Sprite ss = (Sprite)o;
-                                ss.StartAnimate();
-                            }
-                        });
-                });
-        }
-
-        public void Animate(Sprite sprite)
-        {
-           _Scene.ForEach(
-               s => 
-               {
-                   s._Objects.ForEach(
-                       o => {
-                           if (o is Sprite)
-                           {
-                               Sprite ss = (Sprite)o;
-                               if (ss == sprite)
-                                   ss.StartAnimate();
-                           }
-                       });
-               });
-        }
         public override void Update()
         {
             for (int i = 0; i < _Scene.Count; i++)

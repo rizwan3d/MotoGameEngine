@@ -133,6 +133,8 @@ namespace MotoGameEngine
             SDL_RenderClear(_Renderer);
             
             Update?.Invoke(this);
+            
+            _SceneManager.LoadEverything();
             // show the window    
             _SceneManager.Update();
             SDL_RenderPresent(_Renderer);

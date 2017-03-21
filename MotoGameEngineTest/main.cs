@@ -60,23 +60,18 @@ namespace MotoGameEngineTest
             w.MusicManager.Play("c");
             w.MusicManager.Play("d");
 
-
-            s.Visible = true;
-
             img.Rotate(270);
             s.Flip(0, 0, 0, 1);
             s.Velocity = new Vector2D(1, 0);
        
            
-            w.Update += W_Update;
             w.onEvent += W_onEvent;
-            w.OnExit += W_OnExit;
+
+            w.SceneManager.LoadScene(sc2);
+            w.SceneManager.LoadScene(sc);
+
             w.Start();
             
-        }
-
-        private static void W_OnExit(Window sender)
-        {
         }
 
         private static void Sc_OnSceneUpdate(Scene sender)
@@ -117,11 +112,6 @@ namespace MotoGameEngineTest
                 sender.SceneManager.LoadScene(sc2);
             if (sender.IsKeyPresed(KeyCode.y))
                 sender.SceneManager.UnLoad(sc2);
-        }
-
-        private static void W_Update(Window sender)
-        {
-           // w.SceneManager.LoadEverything();
         }
     }
 }
