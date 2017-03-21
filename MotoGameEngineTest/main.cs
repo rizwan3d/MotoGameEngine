@@ -11,15 +11,15 @@ namespace MotoGameEngineTest
         static Sprite s2;
         static Scene sc;
         static Scene sc2;
-        static MusicManager m;
+
         //Animation need more work
-        //Event System need more events
         //Collision
         //GUI .Button,GUI Panal ,Lable etc
         //Tilemaps
         //Partical System
         //movie files
         //camera system
+        //Event System need more events
         //load data(image,sprite,animation,tilemap,movie etc) form XML
         //Visual editor
         //
@@ -50,11 +50,16 @@ namespace MotoGameEngineTest
             w.SceneManager.Add(sc);
             w.SceneManager.Add(sc2);
 
-            m = new MusicManager();
+            w.MusicManager.Add(@"a.wav","a",true);
+            w.MusicManager.Add(@"b.wav", "b");
+            w.MusicManager.Add(@"c.wav", "c");
+            w.MusicManager.Add(@"d.mp3", "d");
 
-            m.Add(@"a.wav","a",true);
+            w.MusicManager.Play("a");
+            w.MusicManager.Play("b");
+            w.MusicManager.Play("c");
+            w.MusicManager.Play("d");
 
-            m.Play("a");
 
             s.Visible = true;
 
@@ -72,7 +77,6 @@ namespace MotoGameEngineTest
 
         private static void W_OnExit(Window sender)
         {
-            
         }
 
         private static void Sc_OnSceneUpdate(Scene sender)
@@ -117,7 +121,7 @@ namespace MotoGameEngineTest
 
         private static void W_Update(Window sender)
         {
-            w.SceneManager.LoadEverything();
+           // w.SceneManager.LoadEverything();
         }
     }
 }

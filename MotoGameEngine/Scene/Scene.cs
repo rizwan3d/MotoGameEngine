@@ -67,18 +67,12 @@ namespace MotoGameEngine
         {
             OnSceneUpdate?.Invoke(this);
             _Objects.ForEach(
-                s => 
+                s =>
                 {
-                    s.Update();
-                });
-        }
-
-        public void Unload()
-        {
-            _Objects.ForEach(
-                o => 
-                {
-                    ((Image)o).IDispose();
+                    try
+                    {
+                        ((Image)s).Update();
+                    } catch (Exception e) { }
                 });
         }
     }

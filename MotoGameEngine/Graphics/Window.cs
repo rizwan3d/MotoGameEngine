@@ -38,6 +38,9 @@ namespace MotoGameEngine
         public event Updatedelegate Update;
         public event OnExit OnExit;
 
+        private MusicManager _MusicManager;
+        public MusicManager MusicManager { get => _MusicManager; set => _MusicManager = value; }
+
         public Window(string Title, int W, int H, bool isFullScreen = false)
         {
             IsGameRunning = false;
@@ -49,7 +52,6 @@ namespace MotoGameEngine
             {
                 throw (new Initializing("Error occurred while initializing"));
             }
-            //UPDATELOOP();
         }
         public Window(string Title, Vector2D size, bool isFullScreen = false)
         {
@@ -104,7 +106,7 @@ namespace MotoGameEngine
             FPS = 60;
 
             IsGameRunning = true;
-            
+            _MusicManager = new MusicManager();
             return true;
         }
 
@@ -117,6 +119,7 @@ namespace MotoGameEngine
         {
 
             OnExit?.Invoke(this);
+            _MusicManager.CloseMusicManager();
             SDL_DestroyWindow(_Window);
             SDL_DestroyRenderer(_Renderer);
             SDL_image.IMG_Quit();
@@ -233,12 +236,6 @@ namespace MotoGameEngine
                 {
                     if (ei.eventfinder[_event.type] == Event.QUIT)
                         IsGameRunning = false;
-                    //if event is related to Window
-                    //if (_event.type == SDL_EventType.SDL_WINDOWEVENT)
-                    //    //if Window resized call  resetSize()
-                    //    if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
-                    //        resetSize();
-                    // call give function on new event
                     Event e = ei.eventfinder[_event.type];
                     //ventUpdateFunction(e);                             
                    onEvent?.Invoke(this, e);

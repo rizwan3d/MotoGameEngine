@@ -32,7 +32,6 @@ namespace MotoGameEngine
         {
             Position = new Vector2D(0, 0); Size = new Vector2D(0, 0);
             _Renderer = Renderer;
-            MusicManager = new MusicManager();
         }
         public GameObject(IntPtr Renderer, int x, int y, int w, int h)
         {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NAudio.Wave;
 
 namespace MotoGameEngine
 {
     public class Music
     {
-        SoundPlayer sp;
+        IWavePlayer waveOutDevice;
+        AudioFileReader audioFileReader;
 
         public string _Name;
 
@@ -17,21 +13,53 @@ namespace MotoGameEngine
 
         public Music(string Path,string Name,bool looped = false)
         {
+            waveOutDevice = new WaveOut();
             _Looped = looped;
+            waveOutDevice.PlaybackStopped += WaveOutDevice_PlaybackStopped;
             _Name = Name;
-            sp = new SoundPlayer(Path);
+            
+            audioFileReader = new AudioFileReader(Path);
+            Debug.Warning(audioFileReader.Position.ToString());
+            waveOutDevice.Init(audioFileReader);
+        }
+
+        private void WaveOutDevice_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            if (_Looped)
+            {
+                if (audioFileReader != null)
+                {
+                    audioFileReader.Position = 0;
+                    Play();
+                }
+            }
         }
 
         public void Play()
         {
-            if (_Looped)
-                sp.PlayLooping();
-            else
-                sp.Play();
+            waveOutDevice.Play();
         }
+
+        public void CloseWaveOut()
+        {
+            if (waveOutDevice != null)
+            {
+                waveOutDevice.Stop();
+            
+                audioFileReader.Dispose();
+                audioFileReader = null;
+            }
+            if (waveOutDevice != null)
+            {
+                waveOutDevice.Dispose();
+                waveOutDevice = null;
+            }
+        }
+
         public void Stop()
         {
-            sp.Stop();
+            waveOutDevice.Stop();
+            audioFileReader.Position = 0;
         }
     }
 }

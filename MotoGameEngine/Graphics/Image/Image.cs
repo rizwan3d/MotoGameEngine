@@ -20,6 +20,8 @@ namespace MotoGameEngine
 
         IntPtr _TempSurface;
 
+        string _Path;
+
     public void SetImage(string Path)
         {
             _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
@@ -44,20 +46,21 @@ namespace MotoGameEngine
         public Image(Scene s,string Path,int x,int y,int w,int h)
         : base(s._win._Renderer,x,y,w,h)
         {
+            _Path = Path;
             _S = s;
-            SetImage(Path);
             init();
         }
         public Image(Scene s, string Path, Vector2D position, Vector2D Size)
         : base(s._win._Renderer, position, Size)
         {
             _S = s;
-            SetImage(Path);
+            _Path = Path;
             init();
         }
 
         void init()
         {
+            SetImage(_Path);
             int a;
             uint b;
 
@@ -76,13 +79,10 @@ namespace MotoGameEngine
 
         public override void Draw()
         {
-            if (_Texture == null)
+            if (Visible)
             {
-                _Texture = SDL_CreateTextureFromSurface(_Renderer, _TempSurface);
                 SDL_FreeSurface(_TempSurface);
-            }
-            SDL_FreeSurface(_TempSurface);
-            _sourceRectangle.w = (int)Size.X;
+                _sourceRectangle.w = (int)Size.X;
                 _sourceRectangle.h = (int)Size.Y;
 
                 _destinationRectangle.x = (int)Position.X;
@@ -91,6 +91,7 @@ namespace MotoGameEngine
                 _destinationRectangle.w = _sourceRectangle.w;
                 _destinationRectangle.h = _sourceRectangle.h;
                 SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
+            }
            
         }
 
@@ -131,10 +132,6 @@ namespace MotoGameEngine
         public void Rotate(float angle)
         {
             _Angle = angle;
-        }
-        public void IDispose()
-        {
-            SDL_DestroyTexture(_Texture);
         }
     }    
 }
