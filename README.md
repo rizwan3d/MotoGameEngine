@@ -18,7 +18,8 @@ The MotoGameEngine Engine is a fully featured 2D game engine.
     Input
         Mouse, Keyboard
 
-#Image
+# Image (be patient while loading)
+
 ![Alt text](/img.gif?raw=true "Image")
 
 Moto🎮Engine use following Open Sorce projects:
