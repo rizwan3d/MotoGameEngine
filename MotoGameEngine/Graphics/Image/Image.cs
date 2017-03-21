@@ -22,6 +22,7 @@ namespace MotoGameEngine
 
         string _Path;
 
+
     public void SetImage(string Path)
         {
             _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
@@ -43,19 +44,21 @@ namespace MotoGameEngine
             SDL_FreeSurface(_TempSurface);
         }
 
-        public Image(Scene s,string Path,int x,int y,int w,int h)
-        : base(s._win._Renderer,x,y,w,h)
+        public Image(Scene s,string Name,string Path,int x,int y,int w,int h, bool visible = false)
+        : base(s._win._Renderer,x,y,w,h, visible)
         {
             _Path = Path;
             _S = s;
             init();
+            _Name = Name;
         }
-        public Image(Scene s, string Path, Vector2D position, Vector2D Size)
-        : base(s._win._Renderer, position, Size)
+        public Image(Scene s, string Name, string Path, Vector2D position, Vector2D Size, bool visible = false)
+        : base(s._win._Renderer, position, Size, visible)
         {
             _S = s;
             _Path = Path;
             init();
+            _Name = Name;
         }
 
         void init()
@@ -81,7 +84,6 @@ namespace MotoGameEngine
         {
             if (Visible)
             {
-                SDL_FreeSurface(_TempSurface);
                 _sourceRectangle.w = (int)Size.X;
                 _sourceRectangle.h = (int)Size.Y;
 
@@ -132,6 +134,11 @@ namespace MotoGameEngine
         public void Rotate(float angle)
         {
             _Angle = angle;
+        }
+
+        public override void Destroy()
+        {
+            SDL_DestroyTexture(_Texture);
         }
     }    
 }

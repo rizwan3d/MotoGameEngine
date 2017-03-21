@@ -11,7 +11,7 @@ namespace MotoGameEngine
     {
         private float _x; float _y;
 
-        public Vector2D(float x, float y) { _x = x; Y = y; }
+        public Vector2D(float x, float y) { _x = x; _y = y; }
 
         public float Y { get => _y; set => _y = value; }
 
@@ -27,8 +27,8 @@ namespace MotoGameEngine
             float l = length();
             if (l > 0) // we never want to attempt to divide by 0  
             {
-                X = X * 1 / l;
-                Y = Y * 1 / l;
+                _x = _x * 1 / l;
+                _y = _y * 1 / l;
             }
         }
 

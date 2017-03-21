@@ -12,12 +12,12 @@ namespace MotoGameEngine
         int _currentFrame = 0;
         int _TotalFrames = 0;
 
-        public Sprite(Scene s, string Path,int TotalFrames, int x, int y, int w, int h) 
-            : base(s,Path,x,y,w,h)
-        { _TotalFrames = TotalFrames; }
+        public Sprite(Scene s, string Name, string Path,int TotalFrames, int x, int y, int w, int h,bool visible = false) 
+            : base(s, Name,Path, x,y,w,h, visible)
+        { _TotalFrames = TotalFrames;  }
 
-        public Sprite(Scene s, string Path, int TotalFrames, Vector2D position, Vector2D Size)
-            : base(s, Path, position , Size)
+        public Sprite(Scene s, string Name,string Path, int TotalFrames, Vector2D position, Vector2D Size, bool visible = false)
+            : base(s, Name, Path, position , Size, visible)
         { _TotalFrames = TotalFrames; }
 
         public void StartAnimate()

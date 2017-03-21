@@ -38,10 +38,10 @@ namespace MotoGameEngineTest
             sc = new Scene(w);
             sc2 = new Scene(w);
 
-            img = new Image(sc,@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
-            s = new Sprite(sc, @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
-            s2= new Sprite(sc2, @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
-
+            img = new Image(sc,"img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
+            s = new Sprite(sc, "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
+            s2= new Sprite(sc2, "s2", @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
+            
             GameObject g = new GameObject(w._Renderer);
             sc.Add(g);
 
@@ -109,9 +109,13 @@ namespace MotoGameEngineTest
                 s2.Position.Y += 1;
             }
             if (sender.IsKeyPresed(KeyCode.t))
-                sender.SceneManager.LoadScene(sc2);
+            {
+                Image kk = new Image(sc2, "kk" , @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
+            }
             if (sender.IsKeyPresed(KeyCode.y))
-                sender.SceneManager.UnLoad(sc2);
+            {
+                sc2.Destroy("kk");
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ namespace MotoGameEngine
         public Vector2D Velocity { get; set; }
         public Vector2D Acceleration { get; set; }
 
+        public String _Name;
+
         public bool Visible
         {
             get => visible;
@@ -34,7 +36,7 @@ namespace MotoGameEngine
             Visible = false;
             _Renderer = Renderer;
         }
-        public GameObject(IntPtr Renderer, int x, int y, int w, int h)
+        public GameObject(IntPtr Renderer, int x, int y, int w, int h,bool visible = false)
         {
             Position = new Vector2D(0, 0);
             Size = new Vector2D(0, 0);
@@ -43,10 +45,10 @@ namespace MotoGameEngine
             Position.Y = y;
             Size.X = h;
             Visible = false;
-
+           this. visible = visible;
             Size.Y = w;
         }
-        public GameObject(IntPtr Renderer, Vector2D position , Vector2D  size)
+        public GameObject(IntPtr Renderer, Vector2D position , Vector2D  size, bool visible = false)
         {
             Position = new Vector2D(0, 0);
             Size = new Vector2D(0, 0);
@@ -54,10 +56,13 @@ namespace MotoGameEngine
             _Renderer = Renderer;
             Position = position;
             Size = size;
+            this.visible = visible;
         }
         public virtual void Draw() {  }
         public virtual void Update() {  }
 
-        public virtual void Clean() {  }
+        public virtual void Destroy() { }
+
+
     }
 }

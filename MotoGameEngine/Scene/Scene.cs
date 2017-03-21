@@ -75,5 +75,20 @@ namespace MotoGameEngine
                     } catch (Exception e) { }
                 });
         }
+
+        public void Destroy(string name)
+        {
+            GameObject j = new GameObject(IntPtr.Zero);
+            _Objects.ForEach(
+                s =>
+                {
+                   if(s._Name == name)
+                    {
+                        j = s;
+                        s.Destroy();
+                    }                   
+                });
+            j.Destroy();
+        }
     }
 }
