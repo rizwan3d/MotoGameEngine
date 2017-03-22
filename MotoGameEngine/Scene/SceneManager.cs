@@ -65,11 +65,11 @@ namespace MotoGameEngine
                  });
         }
 
-        public override void Update()
+        public override void Update(Window sender, Event e)
         {
             for (int i = 0; i < _Scene.Count; i++)
             {
-                    _Scene[i].Update();
+                    _Scene[i].Update(sender, e);
             }
         }
     }

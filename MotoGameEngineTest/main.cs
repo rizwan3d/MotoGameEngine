@@ -50,28 +50,34 @@ namespace MotoGameEngineTest
             w.SceneManager.Add(sc);
             w.SceneManager.Add(sc2);
 
-            w.MusicManager.Add(@"a.wav","a",true);
-            w.MusicManager.Add(@"b.wav", "b");
-            w.MusicManager.Add(@"c.wav", "c");
-            w.MusicManager.Add(@"d.mp3", "d");
+            //w.MusicManager.Add(@"a.wav","a",true);
+            //w.MusicManager.Add(@"b.wav", "b");
+            //w.MusicManager.Add(@"c.wav", "c");
+            //w.MusicManager.Add(@"d.mp3", "d");
 
-            w.MusicManager.Play("a");
-            w.MusicManager.Play("b");
-            w.MusicManager.Play("c");
-            w.MusicManager.Play("d");
+            //w.MusicManager.Play("a");
+            //w.MusicManager.Play("b");
+            //w.MusicManager.Play("c");
+            //w.MusicManager.Play("d");
 
             img.Rotate(270);
             s.Flip(0, 0, 0, 1);
             s.Velocity = new Vector2D(1, 0);
-       
-           
+                      
             w.onEvent += W_onEvent;
 
             w.SceneManager.LoadScene(sc2);
             w.SceneManager.LoadScene(sc);
 
+            s.OnClicked += S_OnClicked;
+
             w.Start();
             
+        }
+
+        private static void S_OnClicked(GameObject sender)
+        {
+            Debug.Log("----- Mouse Clicked on Me -----");
         }
 
         private static void Sc_OnSceneUpdate(Scene sender)

@@ -66,13 +66,13 @@ namespace MotoGameEngine
                     }
                 });
         }
-        public override void Update()
-        {
-            _Objects.ForEach(                
-                s => 
-                {
-                    s.Update();
-                });
-        }
+        //public void Update()
+        //{
+        //    _Objects.ForEach(                
+        //        s => 
+        //        {
+        //            s.Update();
+        //        });
+        //}
     }
 }

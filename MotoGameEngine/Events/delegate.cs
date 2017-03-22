@@ -17,6 +17,11 @@ namespace MotoGameEngine
     public delegate void OnObjectRemoved(Scene sender, GameObject Object);
     public delegate void OnSceneAnimate(Scene sender);
 
+    public delegate void OnClicked(GameObject sender);
+    public delegate void OnHover(GameObject sender);
+
+
+
 
     public delegate void EventUpdatedelegate(Window sender, Event e);
 }

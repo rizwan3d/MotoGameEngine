@@ -59,7 +59,7 @@ namespace MotoGameEngine
             this.visible = visible;
         }
         public virtual void Draw() {  }
-        public virtual void Update() {  }
+        public virtual void Update(Window sender, Event e) {  }
 
         public virtual void Destroy() { }
 

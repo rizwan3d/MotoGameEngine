@@ -58,6 +58,7 @@ namespace MotoGameEngine
 
     public enum Event
     {
+        NULL,
         FIRSTEVENT,
 
         /* Application events */

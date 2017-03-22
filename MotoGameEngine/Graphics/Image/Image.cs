@@ -22,8 +22,10 @@ namespace MotoGameEngine
 
         string _Path;
 
+        public event OnClicked OnClicked;
+        public event OnHover OnHover;
 
-    public void SetImage(string Path)
+        public void SetImage(string Path)
         {
             _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
 
@@ -97,7 +99,7 @@ namespace MotoGameEngine
            
         }
 
-        public override void Update()
+        public override void Update(Window sender,Event e)
         {
             if (Velocity != null)
             {
@@ -109,6 +111,10 @@ namespace MotoGameEngine
             {
                 Velocity = Velocity + Acceleration;
             }
+            if (e == Event.MOUSEBUTTONDOWN && MouseOnMe(sender))
+                OnClicked?.Invoke(this);
+            if (MouseOnMe(sender))
+                OnHover?.Invoke(this);
         }
 
         public void Flip(int angle,int x ,int y,int a)
@@ -139,6 +145,14 @@ namespace MotoGameEngine
         public override void Destroy()
         {
             SDL_DestroyTexture(_Texture);
+        }
+
+        private bool MouseOnMe(Window w)
+        {
+            if ((w.MousePositionX >= Position.X && w.MousePositionX <= (Position.X + Size.X))
+                    && (w.MousePositionY >= Position.Y && w.MousePositionY <= (Position.Y + Size.Y)))
+                return true;
+            return false;
         }
     }    
 }

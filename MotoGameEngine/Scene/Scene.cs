@@ -63,7 +63,7 @@ namespace MotoGameEngine
                     }
                 });
         }
-        public override void Update()
+        public override void Update(Window sender, Event e)
         {
             OnSceneUpdate?.Invoke(this);
             _Objects.ForEach(
@@ -71,8 +71,8 @@ namespace MotoGameEngine
                 {
                     try
                     {
-                        ((Image)s).Update();
-                    } catch (Exception e) { }
+                        ((Image)s).Update(sender, e);
+                    } catch (Exception ee) { }
                 });
         }
 

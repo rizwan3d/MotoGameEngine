@@ -136,7 +136,7 @@ namespace MotoGameEngine
             
             _SceneManager.LoadEverything();
             // show the window    
-            _SceneManager.Update();
+            _SceneManager.Update(this,Event.NULL);
             SDL_RenderPresent(_Renderer);
 
             frameTime = SDL_GetTicks() - frameStart;
@@ -241,6 +241,7 @@ namespace MotoGameEngine
                     Event e = ei.eventfinder[_event.type];
                     //ventUpdateFunction(e);                             
                    onEvent?.Invoke(this, e);
+                   SceneManager.Update(this, e);
                 }                
                 Render();               
             }
