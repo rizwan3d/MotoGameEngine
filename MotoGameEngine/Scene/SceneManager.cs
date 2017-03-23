@@ -65,6 +65,38 @@ namespace MotoGameEngine
                  });
         }
 
+        public Scene GetScene(string name)
+        {
+            foreach(Scene s in _Scene)
+            {
+                if(s._Name == name)
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+
+        public T GetGameObject<T>(string Scenename, string ObjectName) where T : GameObject
+        {
+            GameObject j = new GameObject(IntPtr.Zero);
+            foreach (Scene s in _Scene)
+            {
+                if (s._Name == Scenename)
+                {
+                    foreach (GameObject o in s._Objects)
+                    {
+                        if (o._Name == ObjectName)
+                        {
+                            return (T)o;
+                        }
+                    }
+                }
+            }
+            throw new Exception();
+        }
+
         public override void Update(Window sender, Event e)
         {
             for (int i = 0; i < _Scene.Count; i++)

@@ -6,9 +6,7 @@ namespace MotoGameEngineTest
     {
         static Window w;
 
-        static Scene sc;
-        static Scene sc2;
-
+        //GameObject Add scene my scene name
         //Animation need more work
         //Collision
         //GUI .Button,GUI Panal ,Lable etc
@@ -32,8 +30,8 @@ namespace MotoGameEngineTest
         {
             w = new Window("test", new Vector2D(800, 640));
 
-            sc = new Scene(w);
-            sc2 = new Scene(w);
+            Scene sc = new Scene("sc",w);
+            Scene sc2 = new Scene("sc2",w);
 
             Image img = new Image(sc,"img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
             Sprite s = new Sprite(sc, "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
@@ -43,6 +41,7 @@ namespace MotoGameEngineTest
             sc.Add(g);
 
             sc.OnSceneUpdate += Sc_OnSceneUpdate;
+            sc2.OnSceneUpdate += Sc2_OnSceneUpdate;
 
             w.SceneManager.Add(sc);
             w.SceneManager.Add(sc2);
@@ -72,6 +71,11 @@ namespace MotoGameEngineTest
             
         }
 
+        private static void Sc2_OnSceneUpdate(Scene sender)
+        {
+            sender.GetGameObject<Sprite>("s2").Animate();
+        }
+
         private static void S_OnClicked(GameObject sender)
         {
             Debug.Log("----- Mouse Clicked on Me -----");
@@ -79,18 +83,17 @@ namespace MotoGameEngineTest
 
         private static void Sc_OnSceneUpdate(Scene sender)
         {
-            sc.GetGameObject<Sprite>("s").Animate();
-            sc2.GetGameObject<Sprite>("s2").Animate();
+            sender.GetGameObject<Sprite>("s").Animate();   
 
-            if (sc.GetGameObject<Sprite>("s").Position.X == 800 - 65)
+            if (sender.GetGameObject<Sprite>("s").Position.X == 800 - 65)
             {
-                sc.GetGameObject<Sprite>("s").Velocity = new Vector2D(-1, 0);
-                sc.GetGameObject<Sprite>("s").Flip(0, 0, 0, 0);
+                sender.GetGameObject<Sprite>("s").Velocity = new Vector2D(-1, 0);
+                sender.GetGameObject<Sprite>("s").Flip(0, 0, 0, 0);
             }
-            if (sc.GetGameObject<Sprite>("s").Position.X == 0)
+            if (sender.GetGameObject<Sprite>("s").Position.X == 0)
             {
-                sc.GetGameObject<Sprite>("s").Velocity = new Vector2D(1, 0);
-                sc.GetGameObject<Sprite>("s").Flip(0, 0, 0, 1);
+                sender.GetGameObject<Sprite>("s").Velocity = new Vector2D(1, 0);
+                sender.GetGameObject<Sprite>("s").Flip(0, 0, 0, 1);
             }
         }
 
@@ -98,28 +101,28 @@ namespace MotoGameEngineTest
         {
             if (sender.IsKeyPresed(KeyCode.d))
             {
-                sc2.GetGameObject<Sprite>("s2").Position.X += 1;
+                sender.SceneManager.GetGameObject<Sprite>("sc2","s2").Position.X += 1;
             }
             if (sender.IsKeyPresed(KeyCode.a))
             {
-                sc2.GetGameObject<Sprite>("s2").Position.X -= 1;
+                sender.SceneManager.GetGameObject<Sprite>("sc2", "s2").Position.X -= 1;
             }
             if (sender.IsKeyPresed(KeyCode.w))
             {
-                sc2.GetGameObject<Sprite>("s2").Position.Y -= 1;
+                sender.SceneManager.GetGameObject<Sprite>("sc2", "s2").Position.Y -= 1;
             }
             if (sender.IsKeyPresed(KeyCode.s))
             {
-                sc2.GetGameObject<Sprite>("s2").Position.Y += 1;
+                sender.SceneManager.GetGameObject<Sprite>("sc2", "s2").Position.Y += 1;
             }
-            if (sender.IsKeyPresed(KeyCode.t))
-            {
-                Image kk = new Image(sc2, "kk", @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
-            }
-            if (sender.IsKeyPresed(KeyCode.y))
-            {
-                sc2.Destroy("kk");
-            }
+            //if (sender.IsKeyPresed(KeyCode.t))
+            //{
+            //    Image kk = new Image(sc2, "kk", @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
+            //}
+            //if (sender.IsKeyPresed(KeyCode.y))
+            //{
+            //    sender.SceneManager.GetScene("sc2").Destroy("kk");
+            //}
         }
     }
 }

@@ -19,10 +19,10 @@ namespace MotoGameEngine
 
         public int status = 1;
 
-        public string Name { get; set; }
-        public Scene(Window w) 
+        public Scene(string Name, Window w) 
             : base(w._Renderer)
         {
+            _Name = Name;
             _Objects = new List<GameObject>();
             _win = w;
             OnSceneCreated?.Invoke(this);
