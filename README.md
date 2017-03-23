@@ -11,10 +11,12 @@ The MotoGameEngine Engine is a fully featured 2D game engine.
     Graphics
         accelerated 2D renderer.
         suport all image formates.
+		TileMap
     Collision (coming soon) & Physics 
     Audio
     Scripting system
         Write game behaviours by attaching c# to game entities.
+	EventSystem
     Input
         Mouse, Keyboard
 
