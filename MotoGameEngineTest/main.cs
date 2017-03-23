@@ -33,39 +33,22 @@ namespace MotoGameEngineTest
             Scene sc = new Scene("sc",w);
             Scene sc2 = new Scene("sc2",w);
 
-            Image img = new Image(sc,"img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
-            Sprite s = new Sprite(sc, "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
-            Sprite s2 = new Sprite(sc2, "s2", @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
-            
-            GameObject g = new GameObject(w._Renderer);
-            sc.Add(g);
+            Image img = new Image(w, "sc", "img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
+            Sprite s = new Sprite(w, "sc", "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
+            Sprite s2 = new Sprite(w, "sc2", "s2", @"/sprite.bmp", 8, new Vector2D(300, 300), new Vector2D(32, 32));
+                       
+            img.Rotate(270);
+            s.Flip(0, 0, 0, 1);
+            s.Velocity = new Vector2D(1, 0);
 
             sc.OnSceneUpdate += Sc_OnSceneUpdate;
             sc2.OnSceneUpdate += Sc2_OnSceneUpdate;
 
-            w.SceneManager.Add(sc);
-            w.SceneManager.Add(sc2);
-
-            //w.MusicManager.Add(@"a.wav","a",true);
-            //w.MusicManager.Add(@"b.wav", "b");
-            //w.MusicManager.Add(@"c.wav", "c");
-            //w.MusicManager.Add(@"d.mp3", "d");
-
-            //w.MusicManager.Play("a");
-            //w.MusicManager.Play("b");
-            //w.MusicManager.Play("c");
-            //w.MusicManager.Play("d");
-
-            img.Rotate(270);
-            s.Flip(0, 0, 0, 1);
-            s.Velocity = new Vector2D(1, 0);
-                      
+            s.OnClicked += S_OnClicked;
             w.onEvent += W_onEvent;
 
-            w.SceneManager.LoadScene(sc2);
-            w.SceneManager.LoadScene(sc);
-
-            s.OnClicked += S_OnClicked;
+            w.SceneManager.LoadScene("sc2");
+            w.SceneManager.LoadScene("sc");
 
             w.Start();
             
@@ -115,14 +98,14 @@ namespace MotoGameEngineTest
             {
                 sender.SceneManager.GetGameObject<Sprite>("sc2", "s2").Position.Y += 1;
             }
-            //if (sender.IsKeyPresed(KeyCode.t))
-            //{
-            //    Image kk = new Image(sc2, "kk", @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
-            //}
-            //if (sender.IsKeyPresed(KeyCode.y))
-            //{
-            //    sender.SceneManager.GetScene("sc2").Destroy("kk");
-            //}
+            if (sender.IsKeyPresed(KeyCode.t))
+            {
+                Image kk = new Image(w,"sc2", "kk", @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
+            }
+            if (sender.IsKeyPresed(KeyCode.y))
+            {
+                sender.SceneManager.GetScene("sc2").Destroy("kk");
+            }
         }
     }
 }

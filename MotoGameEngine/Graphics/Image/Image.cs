@@ -46,18 +46,18 @@ namespace MotoGameEngine
             SDL_FreeSurface(_TempSurface);
         }
 
-        public Image(Scene s, string Name, string Path, int x, int y, int w, int h, bool visible = false)
-        : base(s._win._Renderer, x, y, w, h, visible)
+        public Image(Window win,string sceneName, string Name, string Path, int x, int y, int w, int h, bool visible = false)
+        : base(win._Renderer, x, y, w, h, visible)
         {
             _Path = Path;
-            _S = s;
+            _S = win.SceneManager.GetScene(sceneName);
             init();
             _Name = Name;
         }
-        public Image(Scene s, string Name, string Path, Vector2D position, Vector2D Size, bool visible = false)
-        : base(s._win._Renderer, position, Size, visible)
+        public Image(Window win, string sceneName, string Name, string Path, Vector2D position, Vector2D Size, bool visible = false)
+        : base(win._Renderer, position, Size, visible)
         {
-            _S = s;
+            _S = win.SceneManager.GetScene(sceneName);
             _Path = Path;
             init();
             _Name = Name;

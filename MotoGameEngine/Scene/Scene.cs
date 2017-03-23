@@ -26,6 +26,7 @@ namespace MotoGameEngine
             _Objects = new List<GameObject>();
             _win = w;
             OnSceneCreated?.Invoke(this);
+            w.SceneManager.Add(this);
         }
 
         public void Add(GameObject Object)
@@ -34,10 +35,16 @@ namespace MotoGameEngine
             OnObjectAdded?.Invoke(this,Object);
         }
 
-        public void Remove(GameObject Object)
+        public void Remove(string name)
         {
-            _Objects.Remove(Object);
-            OnObjectRemoved?.Invoke(this, Object);
+            foreach (GameObject o in _Objects)
+            {
+                if (o._Name == name)
+                {
+                    OnObjectRemoved?.Invoke(this, o);
+                    _Objects.Remove(o);
+                }
+            }         
         }
     
         public void Load()
