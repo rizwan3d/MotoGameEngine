@@ -68,6 +68,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Others\Timer.cs" />
     <Compile Include="Sysinfo.cs" />
+    <Compile Include="TileMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

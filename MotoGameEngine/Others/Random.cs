@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotoGameEngine
 {
-    class Random
+    public class Random
     {
         static System.Random r = new System.Random();
         public static int Get(int min, int max)
