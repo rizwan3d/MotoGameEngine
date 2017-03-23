@@ -21,7 +21,5 @@ namespace MotoGameEngine
     public delegate void OnHover(GameObject sender);
 
 
-
-
     public delegate void EventUpdatedelegate(Window sender, Event e);
 }

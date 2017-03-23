@@ -6,9 +6,6 @@ namespace MotoGameEngineTest
     {
         static Window w;
 
-        static Image img;
-        static Sprite s;
-        static Sprite s2;
         static Scene sc;
         static Scene sc2;
 
@@ -38,9 +35,9 @@ namespace MotoGameEngineTest
             sc = new Scene(w);
             sc2 = new Scene(w);
 
-            img = new Image(sc,"img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
-            s = new Sprite(sc, "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
-            s2= new Sprite(sc2, "s2", @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
+            Image img = new Image(sc,"img",@"\jk.png", new Vector2D(300, 300), new Vector2D(200, 200));
+            Sprite s = new Sprite(sc, "s", @"/foo.png", 4 , new Vector2D(0,0) , new Vector2D(64,250));
+            Sprite s2 = new Sprite(sc2, "s2", @"/sprite.bmp", 8, new Vector2D(500, 500), new Vector2D(32, 32));
             
             GameObject g = new GameObject(w._Renderer);
             sc.Add(g);
@@ -82,17 +79,18 @@ namespace MotoGameEngineTest
 
         private static void Sc_OnSceneUpdate(Scene sender)
         {
-            s.StartAnimate();
-            s2.StartAnimate();
-            if (s.Position.X == 800 - 65)
+            sc.GetGameObject<Sprite>("s").Animate();
+            sc2.GetGameObject<Sprite>("s2").Animate();
+
+            if (sc.GetGameObject<Sprite>("s").Position.X == 800 - 65)
             {
-                s.Velocity = new Vector2D(-1, 0);
-                s.Flip(0, 0, 0, 0);
+                sc.GetGameObject<Sprite>("s").Velocity = new Vector2D(-1, 0);
+                sc.GetGameObject<Sprite>("s").Flip(0, 0, 0, 0);
             }
-            if (s.Position.X == 0)
+            if (sc.GetGameObject<Sprite>("s").Position.X == 0)
             {
-                s.Velocity = new Vector2D(1, 0);
-                s.Flip(0, 0, 0, 1);
+                sc.GetGameObject<Sprite>("s").Velocity = new Vector2D(1, 0);
+                sc.GetGameObject<Sprite>("s").Flip(0, 0, 0, 1);
             }
         }
 
@@ -100,23 +98,23 @@ namespace MotoGameEngineTest
         {
             if (sender.IsKeyPresed(KeyCode.d))
             {
-                s2.Position.X += 1;
+                sc2.GetGameObject<Sprite>("s2").Position.X += 1;
             }
             if (sender.IsKeyPresed(KeyCode.a))
             {
-                s2.Position.X -= 1;
+                sc2.GetGameObject<Sprite>("s2").Position.X -= 1;
             }
             if (sender.IsKeyPresed(KeyCode.w))
             {
-                s2.Position.Y -= 1;
+                sc2.GetGameObject<Sprite>("s2").Position.Y -= 1;
             }
             if (sender.IsKeyPresed(KeyCode.s))
             {
-                s2.Position.Y += 1;
+                sc2.GetGameObject<Sprite>("s2").Position.Y += 1;
             }
             if (sender.IsKeyPresed(KeyCode.t))
             {
-                Image kk = new Image(sc2, "kk" , @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
+                Image kk = new Image(sc2, "kk", @"\wall2.png", new Vector2D(1, 1), new Vector2D(200, 200), true);
             }
             if (sender.IsKeyPresed(KeyCode.y))
             {

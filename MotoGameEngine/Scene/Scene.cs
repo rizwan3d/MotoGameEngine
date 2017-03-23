@@ -59,7 +59,7 @@ namespace MotoGameEngine
                     if (s is Sprite)
                     {
                         Sprite ss = (Sprite)s;
-                        ss.StartAnimate();
+                        ss.Animate();
                     }
                 });
         }
@@ -89,6 +89,22 @@ namespace MotoGameEngine
                     }                   
                 });
             j.Destroy();
+        }
+
+        public T GetGameObject<T>(string name) where T : GameObject
+        {
+            GameObject j = new GameObject(IntPtr.Zero);
+            _Objects.ForEach(
+                s =>
+                {
+                    if (s._Name == name)
+                    {
+                        j = s;
+                    }
+                });
+            if(j._Name == name)
+                return (T)j;
+            throw new Exception();
         }
     }
 }

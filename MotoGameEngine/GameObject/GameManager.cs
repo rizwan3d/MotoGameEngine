@@ -48,7 +48,7 @@ namespace MotoGameEngine
                     if (s is Sprite)
                     {
                         Sprite ss = (Sprite)s;
-                        ss.StartAnimate();
+                        ss.Animate();
                     }
                 });
         }
@@ -62,7 +62,7 @@ namespace MotoGameEngine
                     {
                         Sprite ss = (Sprite)s;
                         if (ss == sprite)
-                            ss.StartAnimate();
+                            ss.Animate();
                     }
                 });
         }

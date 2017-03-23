@@ -9,7 +9,7 @@ using static SDL2.SDL;
 namespace MotoGameEngine
 {
     public class Image : GameObject
-    {        
+    {
         protected SDL_Rect _sourceRectangle; // the first rectangle 
         protected SDL_Rect _destinationRectangle; // another rectangle 
 
@@ -29,7 +29,7 @@ namespace MotoGameEngine
         {
             _TempSurface = IMG_Load(SDL_GetBasePath() + Path);
 
-            if (_TempSurface == null 
+            if (_TempSurface == null
                 || _TempSurface == IntPtr.Zero)
             {
                 throw (new Loading_Image("Error occurred while loading image"));
@@ -37,17 +37,17 @@ namespace MotoGameEngine
 
             _Texture = SDL_CreateTextureFromSurface(_Renderer, _TempSurface);
 
-            if (_Texture == null 
+            if (_Texture == null
                 || _Texture == IntPtr.Zero)
             {
                 throw (new Loading_Image("Error occurred while loading image"));
-            }           
+            }
 
             SDL_FreeSurface(_TempSurface);
         }
 
-        public Image(Scene s,string Name,string Path,int x,int y,int w,int h, bool visible = false)
-        : base(s._win._Renderer,x,y,w,h, visible)
+        public Image(Scene s, string Name, string Path, int x, int y, int w, int h, bool visible = false)
+        : base(s._win._Renderer, x, y, w, h, visible)
         {
             _Path = Path;
             _S = s;
@@ -96,10 +96,10 @@ namespace MotoGameEngine
                 _destinationRectangle.h = _sourceRectangle.h;
                 SDL_RenderCopyEx(_Renderer, _Texture, ref _sourceRectangle, ref _destinationRectangle, _Angle, ref _Center, _Flip);
             }
-           
+
         }
 
-        public override void Update(Window sender,Event e)
+        public override void Update(Window sender, Event e)
         {
             if (Velocity != null)
             {
@@ -107,7 +107,7 @@ namespace MotoGameEngine
                 _destinationRectangle.x = (int)Position.X;
                 _destinationRectangle.y = (int)Position.Y;
             }
-            if(Acceleration != null)
+            if (Acceleration != null)
             {
                 Velocity = Velocity + Acceleration;
             }
@@ -117,13 +117,13 @@ namespace MotoGameEngine
                 OnHover?.Invoke(this);
         }
 
-        public void Flip(int angle,int x ,int y,int a)
+        public void Flip(int angle, int x, int y, int a)
         {
             _Angle = angle;
             _Center.x = x;
             _Center.y = y;
 
-            if(a == 0)
+            if (a == 0)
             {
                 _Flip = SDL_RendererFlip.SDL_FLIP_NONE;
             }
@@ -154,5 +154,17 @@ namespace MotoGameEngine
                 return true;
             return false;
         }
-    }    
+
+        //int s_buffer = 4;
+        //public bool RectRect(SDL_Rect* A, SDL_Rect* B)
+        //{
+        //    int aHBuf = A->h / s_buffer; int aWBuf = A->w / s_buffer;
+        //    int bHBuf = B->h / s_buffer; int bWBuf = B->w / s_buffer;
+        //    // if the bottom of A is less than the top of B - no collision  if((A->y + A->h) - aHBuf <= B->y + bHBuf)  { return false; }
+        //    // if the top of A is more than the bottom of B = no collision  if(A->y + aHBuf >= (B->y + B->h) - bHBuf)  { return false; }
+        //    // if the right of A is less than the left of B - no collision  if((A->x + A->w) - aWBuf <= B->x +  bWBuf) { return false; }
+        //    // if the left of A is more than the right of B - no collision  if(A->x + aWBuf >= (B->x + B->w) - bWBuf)  { return false; }
+        //    // otherwise there has been a collision return true; } 
+        //}
+    }
 }

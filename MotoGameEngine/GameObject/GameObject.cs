@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotoGameEngine
 { 
-    public class GameObject 
+    public class GameObject
     {
         public IntPtr _Renderer;
         public IntPtr _Texture; // the new SDL_Texture variable

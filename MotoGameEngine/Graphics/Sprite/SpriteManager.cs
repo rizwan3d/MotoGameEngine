@@ -37,12 +37,12 @@ namespace MotoGameEngine
 
         public void Animate()
         {
-            _Sprties.ForEach(s => { s.StartAnimate(); });
+            _Sprties.ForEach(s => { s.Animate(); });
         }
 
         public void Animate(Sprite sprite)
         {
-            _Sprties.ForEach(s => { if(s == sprite) s.StartAnimate(); });
+            _Sprties.ForEach(s => { if(s == sprite) s.Animate(); });
         }
     }
 }
