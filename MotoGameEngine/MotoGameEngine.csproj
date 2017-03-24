@@ -11,6 +11,7 @@
     <AssemblyName>MotoGameEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="irrKlang.NET4">
-      <HintPath>..\packages\irrKlang.NET4.dll</HintPath>
-    </Reference>
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -68,7 +66,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Others\Timer.cs" />
     <Compile Include="Sysinfo.cs" />
-    <Compile Include="TileMap.cs" />
+    <Compile Include="Graphics\TileMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

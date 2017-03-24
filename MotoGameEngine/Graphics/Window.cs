@@ -34,7 +34,7 @@ namespace MotoGameEngine
         private SceneManager _SceneManager = new SceneManager();
         public SceneManager SceneManager { get => _SceneManager; set => _SceneManager = value; }
 
-        public event EventUpdatedelegate onEvent;
+        public event EventUpdatedelegate OnEvent;
         public event Updatedelegate Update;
         public event OnExit OnExit;
 
@@ -240,7 +240,7 @@ namespace MotoGameEngine
                         IsGameRunning = false;
                     Event e = ei.eventfinder[_event.type];
                     //ventUpdateFunction(e);                             
-                   onEvent?.Invoke(this, e);
+                   OnEvent?.Invoke(this, e);
                    SceneManager.Update(this, e);
                 }                
                 Render();               
